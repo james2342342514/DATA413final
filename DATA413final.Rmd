@@ -1,0 +1,257 @@
+---
+title: "DATA-413 Project"
+author: "James Trinkle"
+date: "2024-04-20"
+output:
+  html_document: 
+    toc: yes
+    toc_depth: 2
+    number_sections: no
+runtime: shiny
+---
+
+# Initialize/Clean Data
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+gc()
+library(shiny)
+library(tidyverse)
+library(leaflet)
+library(DT)
+data <- read.table("accident.csv", sep = ",", header = T)
+```
+
+```{r}
+data_clean <- data[, c("STATENAME", "MONTHNAME","DAY","DAY_WEEKNAME","HOUR","ROUTENAME","RUR_URBNAME","FATALS","ARR_MIN","WEATHERNAME","LGT_CONDNAME", "LATITUDE", "LONGITUD")]
+
+data_no_unknowns <- data_clean %>% filter(HOUR >= 0 & HOUR <= 23)
+
+data_no_unknowns <- data_no_unknowns[data_no_unknowns$ARR_MIN >= 0 & data_no_unknowns$ARR_MIN <= 59, ]
+
+
+```
+
+- This is a short description of the variables selected: 
+  - STATENAME: name of state
+  - MONTHNAME: month
+  - DAY: day of month 
+  - DAY_WEEKNAME: day of week 
+  - HOUR: time of day (24 hour clock)
+  - ROUTENAME: Type of road crash occurred on 
+  - RUR_URBNAME: rural or urban area
+  - FATALS: the number of fatally injured people in the crash
+  - ARR_MIN: minute of arrival at scene
+  - WEATHERNAME: information describing the atmospheric
+conditions at the time of the crash
+  - LGT_CONDNAME: the type/level of light that existed at the time of the crash
+  
+
+# 1. Introduction
+
+In this data analysis project, we aim to investigate the factors contributing to fatal road accidents across various states in the United States, focusing on the interplay between environmental and human factors. This study is particularly interesting as it seeks to understand how different conditions, such as weather, light, and the rural or urban setting, interact with the time of day and types of roads to influence accident outcomes. By analyzing data on the number of fatalities, the type of roads where crashes occur, and the atmospheric conditions at the time of these tragic events, we can gain insights into potential preventive measures. The results could be instrumental for policymakers and road safety authorities in designing targeted interventions to reduce the incidence of fatal road accidents.
+
+
+# 2. Summary Statistics and EDA
+
+```{r}
+ggplot(data, aes(x = FATALS)) +
+  geom_histogram(bins = 10, fill = "blue", color = "black") +
+  ggtitle("Distribution of Fatalities per Crash") +
+  xlab("Number of Fatalities") +
+  ylab("Frequency")
+```
+- The histogram depicts the frequency of road crashes by the number of fatalities, with the overwhelming majority of crashes resulting in a single fatality. As the number of fatalities per crash increases, the frequency of such crashes sharply decreases. This pattern suggests that high-fatality accidents are relatively rare compared to those with fewer fatalities. It is important to note this data set only includes accidents which resulted in a fatality. 
+
+```{r}
+ggplot(data_no_unknowns, aes(x = "", y = HOUR)) + 
+  geom_boxplot(fill = "lightblue", color = "darkblue", outlier.shape = 1) +
+  labs(title = "Boxplot of Accidents by Time of Day",
+       x = "",
+       y = "Hour of Day (24-hour)") +
+  theme_minimal() +  
+  theme(axis.text.x = element_blank(),  
+        axis.ticks.x = element_blank(),  
+        axis.title.x = element_blank(),  
+        plot.title = element_text(hjust = 0.5, size = 20, face = "bold"),  
+        axis.text.y = element_text(size = 12),  
+        axis.title.y = element_text(size = 14)) +  
+  scale_y_continuous(breaks = 0:23)
+```
+- The boxplot displays the distribution of times of day when accidents occur, with the central box representing the interquartile range (IQR) from the 25th to the 75th percentile. The median, indicated by the line within the box, appears to be around 2pm, suggesting that is the median time for accidents.
+
+```{r}
+summary(data_no_unknowns$HOUR)
+```
+- The IQR is between 8am-7pm.
+
+```{r}
+ggplot(data_no_unknowns, aes(x = WEATHERNAME)) +
+  geom_bar(fill = "steelblue", color = "black") +
+  theme_minimal() +
+  labs(title = "Accident Count by Weather Conditions",
+       x = "Weather Conditions",
+       y = "Count of Accidents") +
+  theme(axis.text.x = element_text(angle = 65, hjust = 1))
+```
+- The bar chart shows the count of accidents occurring in various weather conditions. The clear majority of accidents occur in clear weather conditions, significantly outnumbering accidents in all other types of weather. The next most common conditions for accidents are cloudy and rain, while extreme weather conditions like snow, sleet, hail, and severe crosswinds have much lower accident counts.
+
+
+```{r}
+ggplot(data_no_unknowns, aes(x = LGT_CONDNAME)) +
+  geom_bar(fill = "darkgreen", color = "black") +
+  theme_minimal() +
+  labs(title = "Accident Count by Light Conditions",
+       x = "Light Conditions",
+       y = "Count of Accidents") +
+  theme(axis.text.x = element_text(angle = 65, hjust = 1))
+```
+- The bar chart illustrates the count of accidents occurring under various light conditions. The majority of accidents happen in daylight, followed by dark, non-lighted conditions. Comparatively fewer accidents occur at dawn and dusk. There are categories with negligible counts labeled as 'Not Reported,' 'Other,' and 'Reported as Unknown,' indicating missing information in those entries. 
+
+
+```{r}
+data_no_unknowns$DAY_WEEKNAME <- factor(data_no_unknowns$DAY_WEEKNAME, 
+                                         levels = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+
+
+ggplot(data_no_unknowns, aes(x = DAY_WEEKNAME)) +
+  geom_bar(aes(fill = DAY_WEEKNAME), color = "black") +
+  ggtitle("Fatalities by Day of Week") +
+  xlab("Day of Week") +
+  ylab("Count of Fatalities") +
+  scale_fill_brewer(palette = "Paired")
+```
+- The bar chart displays the count of fatalities by day of the week, showing a clear pattern of variability. The highest number of fatalities occur on Saturday, followed by Sunday, indicating a trend of more fatal accidents on weekends. Weekdays have a comparatively lower count of fatalities, with the lowest on Monday, suggesting a possible correlation between weekend activities and increased accident fatalities.
+
+
+```{r}
+data_no_unknowns$MONTHNAME <- factor(data_no_unknowns$MONTHNAME, 
+                                     levels = c("January", "February", "March", "April", "May", "June", 
+                                                "July", "August", "September", "October", "November", "December"))
+ggplot(data_no_unknowns, aes(x = MONTHNAME)) +
+  geom_bar(fill = "cornflowerblue", color = "black") +
+  theme_minimal() +
+  labs(title = "Accident Count by Month",
+       x = "Month",
+       y = "Count of Accidents") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+- The bar chart presents the count of accidents distributed by month, with the months now arranged in chronological order. There does appear to be a slight increase in the number of accidents reported from August to October. This increase could suggest a seasonal pattern where the late summer and early autumn months experience a higher frequency of accidents. It might be related to increased travel during these months, back-to-school traffic, or other seasonal factors. It would be valuable to investigate these months further to understand the underlying causes of this observed trend.
+
+```{r, echo = F}
+ui <- fluidPage(
+  titlePanel("Road Accident Analysis Dashboard"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("stateInput", "Choose a State:", 
+                  choices = c("All", unique(data_no_unknowns$STATENAME))),
+      selectInput("weatherInput", "Choose Weather Condition:",
+                  choices = c("All", unique(data_no_unknowns$WEATHERNAME))),
+      sliderInput("hourInput", "Select Hour of Day:",
+                  min = 0, max = 23, value = c(0, 23)),
+      hr(),
+      selectInput("catVar1", "Select the First Categorical Variable:",
+                  choices = names(data_no_unknowns)),
+      selectInput("catVar2", "Select the Second Categorical Variable:",
+                  choices = names(data_no_unknowns)),
+      actionButton("chiButton", "Run Chi-squared Test")
+    ),
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Time Series", plotOutput("timeSeriesPlot")),
+        tabPanel("Conditions", plotOutput("conditionsPlot")),
+        tabPanel("Data Table", DTOutput("dataTable")),
+        tabPanel("Chi-squared Analysis", verbatimTextOutput("chiSummary"))
+      )
+    )
+  )
+)
+server <- function(input, output) {
+  filtered_data <- reactive({
+    data <- data_no_unknowns
+    if (input$stateInput != "All") {
+      data <- data[data$STATENAME == input$stateInput,]
+    }
+    if (input$weatherInput != "All") {
+      data <- data[data$WEATHERNAME == input$weatherInput,]
+    }
+    data <- data[data$HOUR >= input$hourInput[1] & data$HOUR <= input$hourInput[2],]
+    data
+  })
+  
+  output$timeSeriesPlot <- renderPlot({
+    ggplot(filtered_data(), aes(x = MONTHNAME)) + 
+      geom_bar(stat = "count")
+  })
+  
+  output$conditionsPlot <- renderPlot({
+    ggplot(filtered_data(), aes(x = LGT_CONDNAME)) + 
+      geom_bar(stat = "count")
+  })
+  
+  output$dataTable <- renderDT({
+    DT::datatable(filtered_data())
+  })
+  
+  output$chiSummary <- renderPrint({
+    req(input$chiButton)  
+    data <- filtered_data()
+    # Ensure that the variables are factors
+    data[[input$catVar1]] <- as.factor(data[[input$catVar1]])
+    data[[input$catVar2]] <- as.factor(data[[input$catVar2]])
+    # Conduct the chi-squared test
+    chi_result <- chisq.test(data[[input$catVar1]], data[[input$catVar2]])
+    chi_result
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+
+```
+
+
+# 3. Formal Statistical Hypothesis
+
+Effect of Weather Conditions on Crash Response Time
+
+To assess the impact of weather conditions on emergency response times, this study examines whether different atmospheric conditions, as categorized under WEATHERNAME, affect the minutes taken by responders to arrive at the scene of a crash (ARR_MIN). The analysis aims to quantify the extent to which weather conditions might delay or expedite the arrival of emergency services, providing insights into potential areas for improving response strategies in adverse weather scenarios. By statistically evaluating the relationship between weather conditions and response times, the study seeks to establish whether weather is a significant factor in emergency response efficacy.
+
+**Null Hypothesis (H₀):**  
+$$ H_0: \beta_{\text{weather}} = 0 $$
+This states that the coefficient for weather conditions in predicting response time is zero, indicating no effect.
+
+**Alternative Hypothesis (H₁):**  
+$$ H_1: \beta_{\text{weather}} \neq 0 $$
+This suggests that weather conditions significantly influence the response time to crashes.
+
+
+
+# 4. Implementation of Hypothesis
+
+```{r}
+data_no_unknowns$WEATHERNAME <- as.factor(data_no_unknowns$WEATHERNAME)
+
+data_no_unknowns$ARR_MIN <- as.numeric(data_no_unknowns$ARR_MIN)
+
+model <- lm(ARR_MIN ~ WEATHERNAME, data = data_no_unknowns)
+
+summary(model)
+
+par(mfrow=c(2,2))
+plot(model)
+
+```
+
+- The diagnostic plots from the regression analysis raise concerns about the model's adherence to key assumptions. The Residuals vs Fitted plot displays a funneling effect indicative of heteroscedasticity—suggesting that the variance of the residuals is not consistent across the range of predictions. This breach of homoscedasticity suggests that the certainty of our predictions varies with the level of the independent variable, potentially undermining the reliability of standard error estimates.
+
+- The Normal Q-Q plot reveals a departure from the expected normal distribution, particularly at the tails. This deviation points to the presence of outliers or a skewed distribution of the residuals, calling into question the assumption of normality, which is foundational for deriving confidence intervals and hypothesis tests within the regression framework.
+
+- The model has no predictive power with the p-value of 0.2973. The R-squared is extremely low at 0.0001871. Therefore, we can conclude arrival time of emergency services is not influenced by the weather. We do not reject the null hypothesis that the coefficient for weather conditions in predicting response time is zero.
+
+# 5. Conclusion
+
+- This data set is lacking quantitative variables which makes it difficult to do meaningful statistical analysis. The exploratory data analysis is the best part of this report. The series of visualizations provide a multi-faceted overview of road accident data. The histogram depicting the distribution of fatalities per crash shows a highly skewed pattern with a large majority of accidents resulting in one fatality. The boxplot of accidents by the time of day reveals a median accident time around the late afternoon hours, with the majority of accidents occurring during daylight and early evening hours. When examining accident count by weather conditions, a clear majority occur during clear weather, followed by a smaller yet significant number in cloudy conditions. This could indicate that while severe weather conditions might intuitively seem more dangerous, the actual number of accidents occurring during clear conditions is higher, possibly due to a greater number of vehicles on the road during these times.The accident count by light conditions shows that daylight sees the highest number of accidents, followed by dark but lighted conditions. This again may reflect higher traffic volumes during the day and the efficacy of artificial lighting at night in preventing accidents.Fatalities by day of week show a trend where the weekend, especially Saturday, has a higher number of fatalities compared to weekdays. This could be attributed to a variety of factors including increased travel, recreational activities, or varying traffic patterns.Lastly, the accident count by month does not display a drastic fluctuation, suggesting a relatively steady occurrence of accidents throughout the year, with marginally higher counts in the warmer months from May through October, which may correlate with increased travel during these months. Together, these insights paint a picture of road accident trends, highlighting the influence of light and weather conditions, as well as temporal patterns on the incidence of road accidents and their severity. This information could be crucial for policymakers and road safety officials when designing targeted interventions and safety measures.
+

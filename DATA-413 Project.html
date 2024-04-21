@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://127.0.0.1:7879/DATA413final.Rmd -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <script type="application/shiny-singletons"></script>
+  <script type="application/html-dependencies">jquery[3.6.0];shiny-css[1.8.1.1];shiny-javascript[1.8.1.1]</script>
+<script src="./DATA-413 Project_files/jquery.min.js"></script>
+<link href="./DATA-413 Project_files/shiny.min.css" rel="stylesheet">
+<script src="./DATA-413 Project_files/shiny.min.js"></script>  <script src="./DATA-413 Project_files/rmd_loader.js"></script>
+  <link href="./DATA-413 Project_files/rmd_loader.css" rel="stylesheet">
+<script src="./DATA-413 Project_files/header-attrs.js"></script><meta name="viewport" content="width=device-width, initial-scale=1"><link href="./DATA-413 Project_files/bootstrap.min.css" rel="stylesheet" type="text/css"><script src="./DATA-413 Project_files/bootstrap.min.js"></script><script src="./DATA-413 Project_files/html5shiv.min.js"></script><script src="./DATA-413 Project_files/respond.min.js"></script><style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style><script src="./DATA-413 Project_files/tabsets.js"></script><link href="./DATA-413 Project_files/default.css" rel="stylesheet" type="text/css"><script src="./DATA-413 Project_files/highlight.js"></script><link href="./DATA-413 Project_files/rmd_perf.css" rel="stylesheet" type="text/css"><script src="./DATA-413 Project_files/rmd_perf.js"></script><meta name="rstudio_origin" content="127.0.0.1:11499"><script src="./DATA-413 Project_files/rsiframe.js"></script>
+
+
+<meta name="generator" content="pandoc">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+
+
+<meta name="author" content="James Trinkle">
+
+<meta name="date" content="2024-04-20">
+
+<title>DATA-413 Project</title>
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+<script type="text/javascript" src="./DATA-413 Project_files/MathJax.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > *, .MJXp-munder > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none; box-sizing: content-box}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_test {font-style: normal; font-weight: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow: hidden; height: 1px}
+.MathJax_test.mjx-test-display {display: table!important}
+.MathJax_test.mjx-test-inline {display: inline!important; margin-right: -1px}
+.MathJax_test.mjx-test-default {display: block!important; clear: both}
+.MathJax_ex_box {display: inline-block!important; position: absolute; overflow: hidden; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0; width: 1px; height: 60ex}
+.MathJax_em_box {display: inline-block!important; position: absolute; overflow: hidden; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0; width: 1px; height: 60em}
+.mjx-test-inline .MathJax_left_box {display: inline-block; width: 0; float: left}
+.mjx-test-inline .MathJax_right_box {display: inline-block; width: 0; float: right}
+.mjx-test-display .MathJax_right_box {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+  <div>
+    <div class="shiny-panel-conditional" data-display-if="!output.__reactivedoc__" data-ns-prefix="" style="display: none;">
+      <div id="rmd_loader_wrapper">
+        <div id="rmd_loader" style="">
+          <p>Please wait...</p>
+          <img src="./DATA-413 Project_files/rmd_loader.gif">
+        </div>
+      </div>
+    </div>
+    <div id="__reactivedoc__" class="shiny-html-output shiny-bound-output" aria-live="polite">
+
+
+
+
+
+
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="section-header">
+
+
+
+<h1 class="title toc-ignore">DATA-413 Project</h1>
+<h4 class="author">James Trinkle</h4>
+<h4 class="date">2024-04-20</h4>
+
+</div>
+
+<div id="section-TOC">
+<ul>
+<li><a href="http://127.0.0.1:7879/DATA413final.Rmd#section-initializeclean-data" id="section-toc-initializeclean-data">Initialize/Clean Data</a></li>
+<li><a href="http://127.0.0.1:7879/DATA413final.Rmd#section-introduction" id="section-toc-introduction">1.
+Introduction</a></li>
+<li><a href="http://127.0.0.1:7879/DATA413final.Rmd#section-summary-statistics-and-eda" id="section-toc-summary-statistics-and-eda">2. Summary Statistics and
+EDA</a></li>
+<li><a href="http://127.0.0.1:7879/DATA413final.Rmd#section-formal-statistical-hypothesis" id="section-toc-formal-statistical-hypothesis">3. Formal Statistical
+Hypothesis</a></li>
+<li><a href="http://127.0.0.1:7879/DATA413final.Rmd#section-implementation-of-hypothesis" id="section-toc-implementation-of-hypothesis">4. Implementation of
+Hypothesis</a></li>
+<li><a href="http://127.0.0.1:7879/DATA413final.Rmd#section-conclusion" id="section-toc-conclusion">5.
+Conclusion</a></li>
+</ul>
+</div>
+
+<div id="section-initializeclean-data" class="section level1">
+<h1>Initialize/Clean Data</h1>
+<pre class="r"><code class="hljs">data_clean &lt;- data[, c(<span class="hljs-string">"STATENAME"</span>, <span class="hljs-string">"MONTHNAME"</span>,<span class="hljs-string">"DAY"</span>,<span class="hljs-string">"DAY_WEEKNAME"</span>,<span class="hljs-string">"HOUR"</span>,<span class="hljs-string">"ROUTENAME"</span>,<span class="hljs-string">"RUR_URBNAME"</span>,<span class="hljs-string">"FATALS"</span>,<span class="hljs-string">"ARR_MIN"</span>,<span class="hljs-string">"WEATHERNAME"</span>,<span class="hljs-string">"LGT_CONDNAME"</span>, <span class="hljs-string">"LATITUDE"</span>, <span class="hljs-string">"LONGITUD"</span>)]
+
+data_no_unknowns &lt;- data_clean %&gt;% filter(HOUR &gt;= <span class="hljs-number">0</span> &amp; HOUR &lt;= <span class="hljs-number">23</span>)
+
+data_no_unknowns &lt;- data_no_unknowns[data_no_unknowns$ARR_MIN &gt;= <span class="hljs-number">0</span> &amp; data_no_unknowns$ARR_MIN &lt;= <span class="hljs-number">59</span>, ]</code></pre>
+<ul>
+<li>This is a short description of the variables selected:
+<ul>
+<li>STATENAME: name of state</li>
+<li>MONTHNAME: month</li>
+<li>DAY: day of month</li>
+<li>DAY_WEEKNAME: day of week</li>
+<li>HOUR: time of day (24 hour clock)</li>
+<li>ROUTENAME: Type of road crash occurred on</li>
+<li>RUR_URBNAME: rural or urban area</li>
+<li>FATALS: the number of fatally injured people in the crash</li>
+<li>ARR_MIN: minute of arrival at scene</li>
+<li>WEATHERNAME: information describing the atmospheric conditions at
+the time of the crash</li>
+<li>LGT_CONDNAME: the type/level of light that existed at the time of
+the crash</li>
+</ul></li>
+</ul>
+</div>
+<div id="section-introduction" class="section level1">
+<h1>1. Introduction</h1>
+<p>In this data analysis project, we aim to investigate the factors
+contributing to fatal road accidents across various states in the United
+States, focusing on the interplay between environmental and human
+factors. This study is particularly interesting as it seeks to
+understand how different conditions, such as weather, light, and the
+rural or urban setting, interact with the time of day and types of roads
+to influence accident outcomes. By analyzing data on the number of
+fatalities, the type of roads where crashes occur, and the atmospheric
+conditions at the time of these tragic events, we can gain insights into
+potential preventive measures. The results could be instrumental for
+policymakers and road safety authorities in designing targeted
+interventions to reduce the incidence of fatal road accidents.</p>
+</div>
+<div id="section-summary-statistics-and-eda" class="section level1">
+<h1>2. Summary Statistics and EDA</h1>
+<pre class="r"><code class="hljs">ggplot(data, aes(x = FATALS)) +
+  geom_histogram(bins = <span class="hljs-number">10</span>, fill = <span class="hljs-string">"blue"</span>, color = <span class="hljs-string">"black"</span>) +
+  ggtitle(<span class="hljs-string">"Distribution of Fatalities per Crash"</span>) +
+  xlab(<span class="hljs-string">"Number of Fatalities"</span>) +
+  ylab(<span class="hljs-string">"Frequency"</span>)</code></pre>
+<p><img src="./DATA-413 Project_files/unnamed-chunk-2-1.png" width="672">
+- The histogram depicts the frequency of road crashes by the number of
+fatalities, with the overwhelming majority of crashes resulting in a
+single fatality. As the number of fatalities per crash increases, the
+frequency of such crashes sharply decreases. This pattern suggests that
+high-fatality accidents are relatively rare compared to those with fewer
+fatalities. It is important to note this data set only includes
+accidents which resulted in a fatality.</p>
+<pre class="r"><code class="hljs">ggplot(data_no_unknowns, aes(x = <span class="hljs-string">""</span>, y = HOUR)) + 
+  geom_boxplot(fill = <span class="hljs-string">"lightblue"</span>, color = <span class="hljs-string">"darkblue"</span>, outlier.shape = <span class="hljs-number">1</span>) +
+  labs(title = <span class="hljs-string">"Boxplot of Accidents by Time of Day"</span>,
+       x = <span class="hljs-string">""</span>,
+       y = <span class="hljs-string">"Hour of Day (24-hour)"</span>) +
+  theme_minimal() +  
+  theme(axis.text.x = element_blank(),  
+        axis.ticks.x = element_blank(),  
+        axis.title.x = element_blank(),  
+        plot.title = element_text(hjust = <span class="hljs-number">0.5</span>, size = <span class="hljs-number">20</span>, face = <span class="hljs-string">"bold"</span>),  
+        axis.text.y = element_text(size = <span class="hljs-number">12</span>),  
+        axis.title.y = element_text(size = <span class="hljs-number">14</span>)) +  
+  scale_y_continuous(breaks = <span class="hljs-number">0</span>:<span class="hljs-number">23</span>)</code></pre>
+<p><img src="./DATA-413 Project_files/unnamed-chunk-3-1.png" width="672">
+- The boxplot displays the distribution of times of day when accidents
+occur, with the central box representing the interquartile range (IQR)
+from the 25th to the 75th percentile. The median, indicated by the line
+within the box, appears to be around 2pm, suggesting that is the median
+time for accidents.</p>
+<pre class="r"><code class="hljs">summary(data_no_unknowns$HOUR)</code></pre>
+<pre><code class="hljs">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    0.00    8.00   14.00   13.04   19.00   23.00</code></pre>
+<ul>
+<li>The IQR is between 8am-7pm.</li>
+</ul>
+<pre class="r"><code class="hljs">ggplot(data_no_unknowns, aes(x = WEATHERNAME)) +
+  geom_bar(fill = <span class="hljs-string">"steelblue"</span>, color = <span class="hljs-string">"black"</span>) +
+  theme_minimal() +
+  labs(title = <span class="hljs-string">"Accident Count by Weather Conditions"</span>,
+       x = <span class="hljs-string">"Weather Conditions"</span>,
+       y = <span class="hljs-string">"Count of Accidents"</span>) +
+  theme(axis.text.x = element_text(angle = <span class="hljs-number">65</span>, hjust = <span class="hljs-number">1</span>))</code></pre>
+<p><img src="./DATA-413 Project_files/unnamed-chunk-5-1.png" width="672">
+- The bar chart shows the count of accidents occurring in various
+weather conditions. The clear majority of accidents occur in clear
+weather conditions, significantly outnumbering accidents in all other
+types of weather. The next most common conditions for accidents are
+cloudy and rain, while extreme weather conditions like snow, sleet,
+hail, and severe crosswinds have much lower accident counts.</p>
+<pre class="r"><code class="hljs">ggplot(data_no_unknowns, aes(x = LGT_CONDNAME)) +
+  geom_bar(fill = <span class="hljs-string">"darkgreen"</span>, color = <span class="hljs-string">"black"</span>) +
+  theme_minimal() +
+  labs(title = <span class="hljs-string">"Accident Count by Light Conditions"</span>,
+       x = <span class="hljs-string">"Light Conditions"</span>,
+       y = <span class="hljs-string">"Count of Accidents"</span>) +
+  theme(axis.text.x = element_text(angle = <span class="hljs-number">65</span>, hjust = <span class="hljs-number">1</span>))</code></pre>
+<p><img src="./DATA-413 Project_files/unnamed-chunk-6-1.png" width="672">
+- The bar chart illustrates the count of accidents occurring under
+various light conditions. The majority of accidents happen in daylight,
+followed by dark, non-lighted conditions. Comparatively fewer accidents
+occur at dawn and dusk. There are categories with negligible counts
+labeled as ‘Not Reported,’ ‘Other,’ and ‘Reported as Unknown,’
+indicating missing information in those entries.</p>
+<pre class="r"><code class="hljs">data_no_unknowns$DAY_WEEKNAME &lt;- factor(data_no_unknowns$DAY_WEEKNAME, 
+                                         levels = c(<span class="hljs-string">"Sunday"</span>, <span class="hljs-string">"Monday"</span>, <span class="hljs-string">"Tuesday"</span>, <span class="hljs-string">"Wednesday"</span>, <span class="hljs-string">"Thursday"</span>, <span class="hljs-string">"Friday"</span>, <span class="hljs-string">"Saturday"</span>))
+
+
+ggplot(data_no_unknowns, aes(x = DAY_WEEKNAME)) +
+  geom_bar(aes(fill = DAY_WEEKNAME), color = <span class="hljs-string">"black"</span>) +
+  ggtitle(<span class="hljs-string">"Fatalities by Day of Week"</span>) +
+  xlab(<span class="hljs-string">"Day of Week"</span>) +
+  ylab(<span class="hljs-string">"Count of Fatalities"</span>) +
+  scale_fill_brewer(palette = <span class="hljs-string">"Paired"</span>)</code></pre>
+<p><img src="./DATA-413 Project_files/unnamed-chunk-7-1.png" width="672">
+- The bar chart displays the count of fatalities by day of the week,
+showing a clear pattern of variability. The highest number of fatalities
+occur on Saturday, followed by Sunday, indicating a trend of more fatal
+accidents on weekends. Weekdays have a comparatively lower count of
+fatalities, with the lowest on Monday, suggesting a possible correlation
+between weekend activities and increased accident fatalities.</p>
+<pre class="r"><code class="hljs">data_no_unknowns$MONTHNAME &lt;- factor(data_no_unknowns$MONTHNAME, 
+                                     levels = c(<span class="hljs-string">"January"</span>, <span class="hljs-string">"February"</span>, <span class="hljs-string">"March"</span>, <span class="hljs-string">"April"</span>, <span class="hljs-string">"May"</span>, <span class="hljs-string">"June"</span>, 
+                                                <span class="hljs-string">"July"</span>, <span class="hljs-string">"August"</span>, <span class="hljs-string">"September"</span>, <span class="hljs-string">"October"</span>, <span class="hljs-string">"November"</span>, <span class="hljs-string">"December"</span>))
+ggplot(data_no_unknowns, aes(x = MONTHNAME)) +
+  geom_bar(fill = <span class="hljs-string">"cornflowerblue"</span>, color = <span class="hljs-string">"black"</span>) +
+  theme_minimal() +
+  labs(title = <span class="hljs-string">"Accident Count by Month"</span>,
+       x = <span class="hljs-string">"Month"</span>,
+       y = <span class="hljs-string">"Count of Accidents"</span>) +
+  theme(axis.text.x = element_text(angle = <span class="hljs-number">45</span>, hjust = <span class="hljs-number">1</span>))</code></pre>
+<p><img src="./DATA-413 Project_files/unnamed-chunk-8-1.png" width="672">
+- The bar chart presents the count of accidents distributed by month,
+with the months now arranged in chronological order. There does appear
+to be a slight increase in the number of accidents reported from August
+to October. This increase could suggest a seasonal pattern where the
+late summer and early autumn months experience a higher frequency of
+accidents. It might be related to increased travel during these months,
+back-to-school traffic, or other seasonal factors. It would be valuable
+to investigate these months further to understand the underlying causes
+of this observed trend.</p>
+<iframe width="100%" height="400" class="shiny-frame" src="./DATA-413 Project_files/saved_resource.html"></iframe>
+</div>
+<div id="section-formal-statistical-hypothesis" class="section level1">
+<h1>3. Formal Statistical Hypothesis</h1>
+<p>Effect of Weather Conditions on Crash Response Time</p>
+<p>To assess the impact of weather conditions on emergency response
+times, this study examines whether different atmospheric conditions, as
+categorized under WEATHERNAME, affect the minutes taken by responders to
+arrive at the scene of a crash (ARR_MIN). The analysis aims to quantify
+the extent to which weather conditions might delay or expedite the
+arrival of emergency services, providing insights into potential areas
+for improving response strategies in adverse weather scenarios. By
+statistically evaluating the relationship between weather conditions and
+response times, the study seeks to establish whether weather is a
+significant factor in emergency response efficacy.</p>
+<p><strong>Null Hypothesis (H₀):</strong><br>
+<span class="math display"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-1-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;msub&gt;&lt;mi&gt;H&lt;/mi&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/msub&gt;&lt;mo&gt;:&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;&amp;#x03B2;&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext&gt;weather&lt;/mtext&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/math&gt;" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" style="width: 8.158em; display: inline-block;"><span style="display: inline-block; position: relative; width: 6.789em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.67em, 1006.79em, 2.86em, -999.997em); top: -2.497em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="msubsup" id="MathJax-Span-3"><span style="display: inline-block; position: relative; width: 1.313em; height: 0px;"><span style="position: absolute; clip: rect(3.158em, 1000.96em, 4.17em, -999.997em); top: -3.985em; left: 0em;"><span class="mi" id="MathJax-Span-4" style="font-family: STIXGeneral-Italic;">𝐻<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.063em;"></span></span><span style="display: inline-block; width: 0px; height: 3.991em;"></span></span><span style="position: absolute; top: -3.807em; left: 0.896em;"><span class="mn" id="MathJax-Span-5" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">0</span><span style="display: inline-block; width: 0px; height: 3.991em;"></span></span></span></span><span class="mo" id="MathJax-Span-6" style="font-family: STIXGeneral-Regular; padding-left: 0.301em;">:</span><span class="msubsup" id="MathJax-Span-7" style="padding-left: 0.301em;"><span style="display: inline-block; position: relative; width: 2.801em; height: 0px;"><span style="position: absolute; clip: rect(3.158em, 1000.54em, 4.348em, -999.997em); top: -3.985em; left: 0em;"><span class="mi" id="MathJax-Span-8" style="font-family: STIXGeneral-Italic;">𝛽<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 3.991em;"></span></span><span style="position: absolute; top: -3.807em; left: 0.479em;"><span class="texatom" id="MathJax-Span-9"><span class="mrow" id="MathJax-Span-10"><span class="mtext" id="MathJax-Span-11" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">weather</span></span></span><span style="display: inline-block; width: 0px; height: 3.991em;"></span></span></span></span><span class="mo" id="MathJax-Span-12" style="font-family: STIXGeneral-Regular; padding-left: 0.301em;">=</span><span class="mn" id="MathJax-Span-13" style="font-family: STIXGeneral-Regular; padding-left: 0.301em;">0</span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.282em; border-left: 0px solid; width: 0px; height: 1.146em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><msub><mi>β</mi><mrow class="MJX-TeXAtom-ORD"><mtext>weather</mtext></mrow></msub><mo>=</mo><mn>0</mn></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-1"> H_0: \beta_{\text{weather}} = 0 </script></span>
+This states that the coefficient for weather conditions in predicting
+response time is zero, indicating no effect.</p>
+<p><strong>Alternative Hypothesis (H₁):</strong><br>
+<span class="math display"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;msub&gt;&lt;mi&gt;H&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msub&gt;&lt;mo&gt;:&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;&amp;#x03B2;&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mtext&gt;weather&lt;/mtext&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;&amp;#x2260;&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/math&gt;" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-14" style="width: 8.158em; display: inline-block;"><span style="display: inline-block; position: relative; width: 6.789em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.67em, 1006.79em, 2.86em, -999.997em); top: -2.497em; left: 0em;"><span class="mrow" id="MathJax-Span-15"><span class="msubsup" id="MathJax-Span-16"><span style="display: inline-block; position: relative; width: 1.313em; height: 0px;"><span style="position: absolute; clip: rect(3.158em, 1000.96em, 4.17em, -999.997em); top: -3.985em; left: 0em;"><span class="mi" id="MathJax-Span-17" style="font-family: STIXGeneral-Italic;">𝐻<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.063em;"></span></span><span style="display: inline-block; width: 0px; height: 3.991em;"></span></span><span style="position: absolute; top: -3.807em; left: 0.896em;"><span class="mn" id="MathJax-Span-18" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span><span style="display: inline-block; width: 0px; height: 3.991em;"></span></span></span></span><span class="mo" id="MathJax-Span-19" style="font-family: STIXGeneral-Regular; padding-left: 0.301em;">:</span><span class="msubsup" id="MathJax-Span-20" style="padding-left: 0.301em;"><span style="display: inline-block; position: relative; width: 2.801em; height: 0px;"><span style="position: absolute; clip: rect(3.158em, 1000.54em, 4.348em, -999.997em); top: -3.985em; left: 0em;"><span class="mi" id="MathJax-Span-21" style="font-family: STIXGeneral-Italic;">𝛽<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 3.991em;"></span></span><span style="position: absolute; top: -3.807em; left: 0.479em;"><span class="texatom" id="MathJax-Span-22"><span class="mrow" id="MathJax-Span-23"><span class="mtext" id="MathJax-Span-24" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">weather</span></span></span><span style="display: inline-block; width: 0px; height: 3.991em;"></span></span></span></span><span class="mo" id="MathJax-Span-25" style="font-family: STIXGeneral-Regular; padding-left: 0.301em;">≠</span><span class="mn" id="MathJax-Span-26" style="font-family: STIXGeneral-Regular; padding-left: 0.301em;">0</span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.282em; border-left: 0px solid; width: 0px; height: 1.146em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>H</mi><mn>1</mn></msub><mo>:</mo><msub><mi>β</mi><mrow class="MJX-TeXAtom-ORD"><mtext>weather</mtext></mrow></msub><mo>≠</mo><mn>0</mn></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-2"> H_1: \beta_{\text{weather}} \neq 0
+</script></span> This suggests that weather conditions significantly influence
+the response time to crashes.</p>
+</div>
+<div id="section-implementation-of-hypothesis" class="section level1">
+<h1>4. Implementation of Hypothesis</h1>
+<pre class="r"><code class="hljs">data_no_unknowns$WEATHERNAME &lt;- as.factor(data_no_unknowns$WEATHERNAME)
+
+data_no_unknowns$ARR_MIN &lt;- as.numeric(data_no_unknowns$ARR_MIN)
+
+model &lt;- lm(ARR_MIN ~ WEATHERNAME, data = data_no_unknowns)
+
+summary(model)</code></pre>
+<pre><code class="hljs">## 
+## Call:
+## lm(formula = ARR_MIN ~ WEATHERNAME, data = data_no_unknowns)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.922 -14.597   0.438  15.438  34.625 
+## 
+## Coefficients:
+##                                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                           41.000      8.726   4.699 2.65e-06 ***
+## WEATHERNAMEBlowing Snow               -7.737      9.601  -0.806   0.4203    
+## WEATHERNAMEClear                     -11.438      8.728  -1.310   0.1901    
+## WEATHERNAMECloudy                    -11.403      8.737  -1.305   0.1919    
+## WEATHERNAMEFog, Smog, Smoke          -13.612      8.902  -1.529   0.1263    
+## WEATHERNAMEFreezing Rain or Drizzle   -4.789      9.601  -0.499   0.6179    
+## WEATHERNAMENot Reported              -13.839      9.003  -1.537   0.1243    
+## WEATHERNAMEOther                     -23.200     11.707  -1.982   0.0475 *  
+## WEATHERNAMERain                      -12.230      8.749  -1.398   0.1622    
+## WEATHERNAMEReported as Unknown       -12.865      9.185  -1.401   0.1614    
+## WEATHERNAMESevere Crosswinds         -17.625      9.756  -1.807   0.0708 .  
+## WEATHERNAMESleet or Hail             -12.917     10.076  -1.282   0.1999    
+## WEATHERNAMESnow                      -11.078      8.830  -1.255   0.2096    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 17.45 on 10977 degrees of freedom
+## Multiple R-squared:  0.001279,   Adjusted R-squared:  0.0001871 
+## F-statistic: 1.171 on 12 and 10977 DF,  p-value: 0.2973</code></pre>
+<pre class="r"><code class="hljs">par(mfrow=c(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>))
+plot(model)</code></pre>
+<p><img src="./DATA-413 Project_files/unnamed-chunk-10-1.png" width="672"></p>
+<ul>
+<li><p>The diagnostic plots from the regression analysis raise concerns
+about the model’s adherence to key assumptions. The Residuals vs Fitted
+plot displays a funneling effect indicative of
+heteroscedasticity—suggesting that the variance of the residuals is not
+consistent across the range of predictions. This breach of
+homoscedasticity suggests that the certainty of our predictions varies
+with the level of the independent variable, potentially undermining the
+reliability of standard error estimates.</p></li>
+<li><p>The Normal Q-Q plot reveals a departure from the expected normal
+distribution, particularly at the tails. This deviation points to the
+presence of outliers or a skewed distribution of the residuals, calling
+into question the assumption of normality, which is foundational for
+deriving confidence intervals and hypothesis tests within the regression
+framework.</p></li>
+<li><p>The model has no predictive power with the p-value of 0.2973. The
+R-squared is extremely low at 0.0001871. Therefore, we can conclude
+arrival time of emergency services is not influenced by the weather. We
+do not reject the null hypothesis that the coefficient for weather
+conditions in predicting response time is zero.</p></li>
+</ul>
+</div>
+<div id="section-conclusion" class="section level1">
+<h1>5. Conclusion</h1>
+<ul>
+<li>This data set is lacking quantitative variables which makes it
+difficult to do meaningful statistical analysis. The exploratory data
+analysis is the best part of this report. The series of visualizations
+provide a multi-faceted overview of road accident data. The histogram
+depicting the distribution of fatalities per crash shows a highly skewed
+pattern with a large majority of accidents resulting in one fatality.
+The boxplot of accidents by the time of day reveals a median accident
+time around the late afternoon hours, with the majority of accidents
+occurring during daylight and early evening hours. When examining
+accident count by weather conditions, a clear majority occur during
+clear weather, followed by a smaller yet significant number in cloudy
+conditions. This could indicate that while severe weather conditions
+might intuitively seem more dangerous, the actual number of accidents
+occurring during clear conditions is higher, possibly due to a greater
+number of vehicles on the road during these times.The accident count by
+light conditions shows that daylight sees the highest number of
+accidents, followed by dark but lighted conditions. This again may
+reflect higher traffic volumes during the day and the efficacy of
+artificial lighting at night in preventing accidents.Fatalities by day
+of week show a trend where the weekend, especially Saturday, has a
+higher number of fatalities compared to weekdays. This could be
+attributed to a variety of factors including increased travel,
+recreational activities, or varying traffic patterns.Lastly, the
+accident count by month does not display a drastic fluctuation,
+suggesting a relatively steady occurrence of accidents throughout the
+year, with marginally higher counts in the warmer months from May
+through October, which may correlate with increased travel during these
+months. Together, these insights paint a picture of road accident
+trends, highlighting the influence of light and weather conditions, as
+well as temporal patterns on the incidence of road accidents and their
+severity. This information could be crucial for policymakers and road
+safety officials when designing targeted interventions and safety
+measures.</li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("section-TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+</div>
+  </div>
+
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; min-width: 0px; max-width: none; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: STIXSizeOneSym, sans-serif;"></div></div></body></html>
